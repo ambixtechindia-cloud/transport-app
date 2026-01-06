@@ -32,9 +32,10 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install buildozer cython python-for-android
 
-      - name: Build APK
-        run: |
-          buildozer android debug
+     - name: Build APK (Verbose)
+       run: |
+       buildozer -v android debug
+
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
