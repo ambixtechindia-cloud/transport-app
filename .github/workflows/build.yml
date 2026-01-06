@@ -41,3 +41,5 @@ jobs:
       with:
         name: TransportApp-APK
         path: bin/*.apk
+
+    - Retry buildozer on network failure
