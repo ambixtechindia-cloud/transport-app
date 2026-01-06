@@ -24,6 +24,12 @@ jobs:
             libffi-dev libssl-dev \
             autoconf automake libtool pkg-config \
             zlib1g-dev libncurses-dev
+    
+      - name: Clean buildozer
+       run: |
+       rm -rf ~/.buildozer
+
+
 
       - name: Install Buildozer
         run: |
@@ -36,7 +42,7 @@ jobs:
 
       - name: Build APK
         run: |
-          buildozer android debug
+          buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
