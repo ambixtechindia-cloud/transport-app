@@ -1,0 +1,46 @@
+<TransportLayout>:
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    Label:
+        id: date_lbl
+        text: "Date: Today"
+        bold: True
+        color: 0, 0, 0, 1
+
+    Button:
+        text: "Select Date"
+        on_press: root.open_date_picker()
+
+    TextInput:
+        id: vehicle
+        hint_text: "Vehicle Number"
+
+    TextInput:
+        id: driver
+        hint_text: "Driver Name"
+
+    TextInput:
+        id: material
+        hint_text: "Material Name"
+
+    TextInput:
+        id: qty
+        hint_text: "Quantity"
+
+    TextInput:
+        id: meter
+        hint_text: "Meter Reading"
+
+    TextInput:
+        id: diesel
+        hint_text: "Diesel"
+
+    TextInput:
+        id: other
+        hint_text: "Other Expense"
+
+    Button:
+        text: "Save"
+        on_press: root.save_data()
