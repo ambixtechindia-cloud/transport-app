@@ -1,45 +1,28 @@
-name: Android APK Build
+- name: Install system dependencies
+  run: |
+    sudo apt update
+    sudo apt install -y \
+      zip unzip openjdk-17-jdk \
+      python3-pip git
 
-on:
-  workflow_dispatch:
+- name: Install Buildozer
+  run: |
+    pip install --upgrade pip
+    pip install buildozer cython
 
-jobs:
-  build:
-    runs-on: ubuntu-22.04
+- name: Pre-install Android SDK components for Buildozer
+  run: |
+    mkdir -p ~/.buildozer/android/platform
+    yes | sdkmanager --sdk_root=$HOME/.buildozer/android/platform/android-sdk \
+      "platform-tools" \
+      "platforms;android-33" \
+      "build-tools;33.0.2"
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+- name: Accept Android SDK licenses (Buildozer SDK)
+  run: |
+    yes | sdkmanager --sdk_root=$HOME/.buildozer/android/platform/android-sdk --licenses
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
+- name: Build APK
+  run: |
+    buildozer android debug
 
-      - name: Install system dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            git zip unzip openjdk-17-jdk \
-            autoconf automake libtool pkg-config \
-            libffi-dev libssl-dev \
-            liblzma-dev zlib1g-dev
-      - name: Install Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Accept Android SDK licenses
-        run: |
-        yes | sdkmanager --licenses
-
-      - name: Install Buildozer
-        run: |
-        pip install --upgrade pip
-        pip install buildozer cython
-
-      - name: Build APK
-        run: |
-        buildozer android debug
-
-
-          
-     Configure GitHub Actions APK build with Buildozer
