@@ -5,11 +5,12 @@ package.domain = org.ambixtech
 source.dir = .
 version = 0.1
 
-requirements = python3,kivy==2.3.0,kivymd==1.2.0
+requirements = python3==3.10,kivy
 
 orientation = portrait
 fullscreen = 0
 
+p4a.branch = stable
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
